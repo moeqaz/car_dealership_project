@@ -25,7 +25,7 @@ FROM dealership;
 
 -- Stored procedure to add Hondas
 
-CREATE OR REPLACE PROCEDURE add_cars(
+CREATE OR REPLACE PROCEDURE add_honda(
 	year_ INTEGER,
 	vin_number VARCHAR(20),
 	make VARCHAR(25),
@@ -45,7 +45,7 @@ END;
 $$;
 
 
-CALL add_cars(2019, '5BRTH32NDH6512', 'INFINITI', 'QX60', 'Black', 45820.00, 38420.00, FALSE, 2);
+CALL add_honda(2021, '2YEHR65FJD2546', 'Honda', 'CR-V', 'Blue', 32220.00, 28640.00);
 
 SELECT *
 FROM cars;
@@ -53,7 +53,7 @@ FROM cars;
 
 
 -- Store procedure to add INFINITIs
-CREATE OR REPLACE PROCEDURE add_cars(
+CREATE OR REPLACE PROCEDURE add_infiniti(
 	year_ INTEGER,
 	vin_number VARCHAR(20),
 	make VARCHAR(25),
@@ -67,10 +67,15 @@ CREATE OR REPLACE PROCEDURE add_cars(
 LANGUAGE plpgsql
 AS $$
 BEGIN 
-	INSERT INTO cars(year_, vin_number, make, model, color, price, dealer_cost, new_vehicle, store_id)
-	VALUES(year_, vin_number, make, model, color, price, dealer_cost, TRUE, 1);
+	INSERT INTO cars(year_, vin_number, make, model, color, price, dealer_cost)
+	VALUES(year_, vin_number, make, model, color, price, dealer_cost);
 END;
 $$;
+
+CALL add_infiniti(2023, '7NDHS3YTFG8412', 'INFINITI', 'Q50', 'White', 41780.00, 37290.00);
+
+SELECT *
+FROM cars;
 
 
 -- Stored procedure to add customer rows
@@ -92,7 +97,7 @@ END;
 $$;
 
 
-CALL add_customer('Sam', 'Sabeeh', '1 Snow Street', 'sams@email.com', '410-364-8466', TRUE);
+CALL add_customer('Winter', 'Rogers', '415 Engleton Avenue', 'wrog@email.com', '252-387-9846', TRUE);
 
 SELECT *
 FROM customer;
